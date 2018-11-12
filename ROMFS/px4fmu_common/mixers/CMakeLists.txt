@@ -84,6 +84,7 @@ px4_add_romfs_files(
 	vtol_AAERT.aux.mix
 	vtol_AAVVT.aux.mix
 	vtol_convergence.main.mix
+	vtol_kite.main.mix
 	vtol_delta.aux.mix
 	wingwing.main.mix
 	zmr250.main.mix

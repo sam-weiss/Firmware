@@ -347,6 +347,16 @@ void Tiltrotor::fill_actuator_outputs()
 		_actuators_out_0->control[actuator_controls_s::INDEX_THROTTLE] =
 			_actuators_fw_in->control[actuator_controls_s::INDEX_THROTTLE];
 
+		_actuators_out_1->timestamp = hrt_absolute_time();
+		_actuators_out_1->timestamp_sample = _actuators_fw_in->timestamp_sample;
+
+		_actuators_out_1->control[actuator_controls_s::INDEX_ROLL] =
+			-_actuators_fw_in->control[actuator_controls_s::INDEX_ROLL];
+		_actuators_out_1->control[actuator_controls_s::INDEX_PITCH] =
+			(_actuators_fw_in->control[actuator_controls_s::INDEX_PITCH]);
+		_actuators_out_1->control[actuator_controls_s::INDEX_YAW] =
+			_actuators_fw_in->control[actuator_controls_s::INDEX_YAW];	// yaw
+
 		/* allow differential thrust if enabled */
 		if (_params_tiltrotor.diff_thrust == 1) {
 			_actuators_out_0->control[actuator_controls_s::INDEX_ROLL] =
@@ -358,14 +368,5 @@ void Tiltrotor::fill_actuator_outputs()
 			_actuators_mc_in->control[actuator_controls_s::INDEX_THROTTLE];
 	}
 
-	_actuators_out_1->timestamp = hrt_absolute_time();
-	_actuators_out_1->timestamp_sample = _actuators_fw_in->timestamp_sample;
-
-	_actuators_out_1->control[actuator_controls_s::INDEX_ROLL] =
-		-_actuators_fw_in->control[actuator_controls_s::INDEX_ROLL];
-	_actuators_out_1->control[actuator_controls_s::INDEX_PITCH] =
-		(_actuators_fw_in->control[actuator_controls_s::INDEX_PITCH]);
-	_actuators_out_1->control[actuator_controls_s::INDEX_YAW] =
-		_actuators_fw_in->control[actuator_controls_s::INDEX_YAW];	// yaw
 	_actuators_out_1->control[4] = _tilt_control;
 }
